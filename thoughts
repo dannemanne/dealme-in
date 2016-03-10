@@ -1,0 +1,22 @@
+User
+ - name
+ - password
+
+
+
+Game
+ - started_by
+ - description
+
+
+Player
+ - game
+ - user
+
+
+Card
+ - game
+ - identifier (ace of heart, 10 of diamonds, etc)
+ - location (deck, hand, board, etc)
+ - coord_x
+ - coord_y

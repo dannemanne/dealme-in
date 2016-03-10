@@ -1,0 +1,7 @@
+<% content_for :menu do %>
+
+  <%= react_component 'GameMenuComponent' %>
+
+<% end %>
+
+<%= react_component 'GameBoardScreen', render('game_board_screen', format: 'json', game: @game, current_user: current_user) %>

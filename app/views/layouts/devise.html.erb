@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vagrant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'vendor/modernizr' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<p class="flash-notice"><%= notice %></p>
+<p class="flash-alert"><%= alert %></p>
+
+
+<div class="row">
+  <div class="medium-6 medium-offset-3 small-12 columns">
+
+    <%= yield %>
+
+  </div>
+</div>
+
+
+</body>
+</html>

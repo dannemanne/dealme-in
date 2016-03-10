@@ -1,0 +1,97 @@
+<div class="row">
+  <div class="medium-6 columns">
+
+    <h1>Waiting For Players</h1>
+
+    <ul class="accordion" data-accordion role="tablist">
+      <% @waiting_for_players.each_with_index do |game, i| %>
+        <li class="accordion-navigation">
+          <a href="#panelWaiting<%= i %>" role="tab" class="accordion-title" id="panelWaiting<%= i %>-heading" aria-controls="panelWaiting<%= i %>">
+            <%= game.title %> <span class="badge" style="float: right;"><%= game.players.count %> / <%= game.max_players %></span>
+          </a>
+          <div id="panelWaiting<%= i %>" class="content" role="tabpanel" aria-labelledby="panelWaiting<%= i %>-heading">
+            <h3>Description</h3>
+            <p><%=simple_format game.description %></p>
+
+            <h3>Players</h3>
+            <% if game.players.any? %>
+              <% game.players.each do |player| %>
+                <p><%= player.user.name %></p>
+              <% end %>
+            <% else %>
+              <p style="font-style: italic;">No Players yet</p>
+            <% end %>
+
+            <div class="actions">
+              <%= form_for current_user.players.build, url: game_players_path(game) do |f| %>
+                <%= f.hidden_field :user_id %>
+                <%= f.submit 'Join Game', class: 'button' %>
+              <% end %>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+
+
+  </div>
+  <div class="medium-6 columns">
+
+    <h1>My Recent Games</h1>
+
+    <ul class="accordion" data-accordion role="tablist">
+      <% @my_recent.each_with_index do |game, i| %>
+        <li class="accordion-navigation">
+          <a href="#panelRecent<%= i %>" role="tab" class="accordion-title" id="panelRecent<%= i %>-heading" aria-controls="panelRecent<%= i %>">
+            <%= game.title %>, <%= game.status %>
+          </a>
+          <div id="panelRecent<%= i %>" class="content" role="tabpanel" aria-labelledby="panelRecent<%= i %>-heading">
+            <h3>Description</h3>
+            <p><%=simple_format game.description %></p>
+
+            <h3>Players</h3>
+            <% if game.players.any? %>
+              <% game.players.each do |player| %>
+                <p><%= player.user.name %></p>
+              <% end %>
+            <% else %>
+              <p style="font-style: italic;">No Players yet</p>
+            <% end %>
+
+            <div class="actions">
+              <%= link_to 'Go to Game', game_path(game), class: 'button' %>
+            </div>
+          </div>
+        </li>
+      <% end %>
+      <li class="accordion-navigation">
+        <a href="#panelNewGame" role="tab" class="accordion-title" id="panelNewGame-heading" aria-controls="panelNewGame">
+          New Game
+        </a>
+        <div id="panelNewGame" class="content" role="tabpanel" data-tab-content aria-labelledby="panelNewGame-heading">
+          <%= form_for Game.new do |f| %>
+            <div class="field">
+              <%= f.label :title %><br />
+              <%= f.text_field :title, autofocus: true %>
+            </div>
+
+            <div class="field">
+              <%= f.label :description %><br />
+              <%= f.text_area :description %>
+            </div>
+
+            <div class="field">
+              <%= f.label :max_players %><br />
+              <%= f.select :max_players, %w(1 2 3 4) %>
+            </div>
+
+            <div class="actions">
+              <%= f.submit 'Create Game', class: 'button' %>
+            </div>
+          <% end %>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+</div>
