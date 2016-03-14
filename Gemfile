@@ -5,6 +5,9 @@ ruby '2.1.5'
 gem 'rails', '4.2.5'
 gem 'pg'
 
+# Websockets
+gem 'faye-websocket', '~> 0.10.3'
+
 # Authentication
 gem 'devise'
 
